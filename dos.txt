@@ -1,0 +1,6 @@
+查看端口号被哪个程序占用
+打开cmd 
+  1.输入 netstat   -ano（看端口对应的PID）
+  2.输入tasklist （查看所有的进程，找出PID对应的应用程序）
+
+  3.可以采用taskkill/pid pid号/t/f ,快速关闭此进程

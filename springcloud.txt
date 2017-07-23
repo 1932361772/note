@@ -1,0 +1,2 @@
+springcloud启动加载顺序:
+	bootstrap.*里面的配置-->链接config server加载远程配置(git仓库)-->加载application.*里面的配置

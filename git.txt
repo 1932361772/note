@@ -1,0 +1,389 @@
+copssh 验证目录
+	C:\Program Files (x86)\ICW\home\COPSSH
+
+版本控制人员:verman_*,例如:verman_laoli
+程序开发人员:coder_*,例如:coder_laowang
+程序测试人员:test_*,例如:test_mldn
+
+1,coder_yootk账户 密码:a
+2,安装copssh,打开服务,进行用户的配置,将coder_lxh(coder_yootk)账户配置到copssh
+	授权目录:C:\Program Files (x86)\ICW\home\coder_yootk\.ssh
+	SSHKEY的目录C:\Users\Administrator\.ssh	
+	在 C:\Program Files (x86)\ICW\home\coder_yootk\.ssh\中添加文件:authorized_keys(首先将性公钥C:\Users\Administrator\.ssh\id_rsa.pub的信息复制到新建的文本authorized_keys.txt文件中.保存后去掉后缀.txt)
+3.连接测试:	
+	IP:192.168.1.100
+	打开git bash:输入ssh coder_yootk@192.168.1.100 (格式:协议 用户名@IP地址)
+	生成目录:mkdir mypro(可以输入ls查看目录)
+		(coder_yootk的所有操作都保存在copssh的相关的用户的相关目录中:C:\Program Files (x86)\ICW\home\coder_yootk.)	
+
+4.配置copssh和git的映射路径.主要配置2个文件:
+	1.C:\Program Files (x86)\ICW\home\coder_yootk\.bashrc加载git路径:C:\Program Files\Git\mingw64\bin和:C:\Program Files\Git\mingw64\libexec\git-core
+		在这个文件的末尾粘贴:export PATH="/bin:$syspath:$winpath:/cygdrive/C/Program Files/Git/mingw64/bin:/cygdrive/C/Program Files/Git/mingw64/libexec/git-core"
+	2.C:\Program Files (x86)\ICW\etc\profile在其中配置export PATH="/bin:$syspath:$winpath:/cygdrive/C/Program Files/Git/mingw64/bin:/cygdrive/C/Program Files/Git/mingw64/libexec/git-core"注销原有的#export PATH="/bin:$syspath:$winpath"
+
+重新启动copssh.此时已经配置好copssh与git的联合环境.随后通过GITBash进行远程登录.
+	ssh coder_yootk@192.168.1.100-->git(命令可以使用)-->mkdir mldn.git-->cd mldn.git/
+		实际的仓库地址:coder_yootk@192.168.1.100:mldn.git=============================================
+	git clone https://git.oschina.net/git1039755127/config-repo-51cto-video-learning.git-->编写代码-->代码推送:git add .-->git commit -m "Create Hello.txt"-->git push origin master
+
+ git clean -xdf 会删除该目录下的所有文件,慎用.-------------
+
+ssh coder_yootk@192.168.1.100-->mkdir gitconfigServer.git-->git init --bare
+pwd可以查看目录.
+
+
+开源码云用户名:git1039755127密码:
+
+搭建的git服务器地址:coder_yootk@192.168.1.100:gitconfig.git---------------------------
+
+
+
+GitHub: username:1932361772  password:123456(email Address:1932361772@qq.com)用户名和密码都输入:1932361772@qq.com即可登入.
+git@github.com:1932361772/configServer.git
+安全连接:sshkey
+gitbush-->生成rsa:ssh-keygen -t rsa-->file:空 passphrase:空-->取得公钥和私钥:
+
+访问地址:git@github.com:1932361772/amr.git
+建立本地和远程的连接:
+	git remote add origin git@github.com:1932361772/amr.git-->git push -u origin master
+
+将项目发布到GitHub公共项目git@github.com:1932361772/microservice-config-server.git上
+	preferences-->ssh2-->key Management-->load Existing Key...-->选择C:\Users\Administrator\.ssh\id_rsa私钥文件.-->Apply-->ok-->
+	-->创建本地化仓库:项目共享的操作:Team-->share project-->git-->勾选Configure Git Repository下的Use or creat repository in parent folder of project并且点击Create Repository-->会自动在项目所在目录下生成一个.git文件-->Finish-->
+	-->需要对项目进行发布:Team-->commit--选择提交的文件,添加注释-->点击commit and Push-->填写GitHub的uri地址git@github.com:1932361772/microservice-config-server.git-->next-->Push Branch master下的next-->push Confirmation下的finish
+	
+	其中在push tobranch remote中的需勾选'Force overwrite branch in remote if it exists and has diverged'否则提交不上.在手动可以提交.仅仅是在eclipse中不能提交.................................................
+
+如果想让一个已经发布的文件更改其状态,则删掉项目内.git文件即可.此时eclipse里面的项目会再次出现Team-->share project选项--------------------------------------------------------
+	如果在GitHub上没有选择Initialize this repository with a README则不用使用强制更新.-------++++++++++++++
+
+新的分支的创建操作:Team-->switch to: new branch -->输入branch name:比如dev-->项目自动切换的到dev分支.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+最基本的命令：
+
+git clone 拷贝并跟踪远程的master分支。跟踪的好处是以后可以直接通过pull和push命令来提交或者获取远程最新的代码，而不需要指定远程分支名字。
+
+git submodule init
+
+git submodule update
+
+ 
+
+
+显示信息类命令 
+git ls-files -u 显示冲突的文件，-s是显示标记为冲突已解决的文件
+
+git diff 对比工作区和stage文件的差异 
+git diff --cached 对比stage和branch之间的差异
+
+git branch 列出当前repository下的所有branch 
+git branch --a 列出local 和remote下的所有branch
+
+git ls-files --stage 检查保存在stage的文件
+
+git log 显示到HEAD所指向的commit为止的所有commit记录 。使用reset HEAD~n 命令使HEAD指针向前移动，会导致HEAD之后的commit记录不会被显示。
+
+git log -g则会查询reflog去查看最近做了哪些动作，这样可以配合git branch 恢复之前因为移动HEAD指针所丢弃的commit对象。如果reflog丢失则可以通过git fsck --full来查看没被引用的commit对象。 
+git log -p -2 对比最新两次的commit对象 
+log -1 HEAD
+
+git log --pretty=oneline
+
+git log --stat 1a410e 查看sha1为1a410e的commit对象的记录
+
+git blame -L 12,22 sth.cs 如果你发现自己代码中 的一个方法存在缺陷,你可以用git blame来标注文件,查看那个方法的每一行分别是由谁 在哪一天修改的。下面这个例子使用了-L选项来限制输出范围在第12至22行
+
+
+　　$ git status # 显示所有变更文件
+  
+　　$ git log # 显示当前分支的版本历史
+  
+　　$ git log --stat # 显示当前分支的版本历史,以及发生变更的文件
+  
+　　$ git blame [file] # 显示指定文件是什么人在什么时间修改过
+  
+　　$ git log -p [file] # 显示指定文件相关的每一次diff
+  
+　　$ git diff # 显示暂存区和工作区的差异
+  
+　　$ git diff --cached [commit] # 显示暂存区和某个commit的差异
+  
+　　$ git diff HEAD # 显示工作区与当前分支最新commit之间的差异
+  
+　　$ git show [commit] # 显示某次提交的元数据和内容变化
+  
+　　$ git show --name-only [commit] # 显示某次提交发生变化的文件
+  
+　　$ git show [commit]:[filename] # 显示某次提交时,某个文件的内容
+  
+　　$ git reflog # 显示当前分支的最近几次提交
+
+创建类命令 
+git brach branchName 创建名为branchName的branch 
+git checkout branchName 切换到branchName的branch 
+git checkout -b 创建并切换，也就是上面两个命令的合并
+
+git brach branchName ef71 从commit ef71创建名为branchName的branch
+　　$ git init #当前目录新建一个Git代码库
+  
+　　$ git init [project-name] #新建一个目录,将其初始化为Git代码库
+  
+　　$ git clone [url] #下载一个项目和它的整个代码历史
+  
+　　$ git fetch [url] #下载/同步项目到
+
+撤销类命令 
+如果是单个文件 
+1.use "git reset HEAD <file>..." to unstage 
+	如果已经用add 命令把文件加入stage了，就先需要从stage中撤销
+
+	然后再从工作区撤销 
+2.use "git checkout -- <file>..." to discard changes in working directory
+
+	git checkout a.txt  撤销a.txt的变动（工作区上的文件） 
+	如果是多个文件 
+	git chenkout .
+　$ git checkout [file] # 恢复暂存区的指定文件到工作区(注意区别分支操作中得checkout命令)
+  
+　　$ git checkout [commit] [file] # 恢复某个commit的指定文件到暂存区和工作区
+  
+　　$ git checkout . # 恢复暂存区的所有文件到工作区
+  
+　　$ git reset [file] # 重置暂存区的指定文件,与最新的commit保持一致,但工作区不变
+  
+　　$ git reset --hard # 重置暂存区与工作区,与最新的commit保持一致
+  
+　　$ git reset [commit] # 重置当前分支的指针为指定commit,同时重置暂存区,但工作区不变
+  
+　　$ git reset --hard [commit] #  重置当前分支的HEAD为指定commit,同时重置暂存区和工作区,与指定commit一致
+  
+　　$ git reset --keep [commit] # 重置当前HEAD为指定commit,但保持暂存区和工作区不变
+  
+　　$ git revert [commit] # 新建一个commit,用来撤销指定commit
+  
+
+如果已经commit 了，则需要 
+git commit --amend 来修改，这个只能修改最近上一次的,也就是用一个新的提交来覆盖上一次的提交。因此如果push以后再做这个动作就会有危险
+
+$ git reset --hard HEAD 放弃工作区和index的改动,HEAD指针仍然指向当前的commit.（参照第一幅图）
+
+这条命令同时还可以用来撤销还没commit的merge,其实原理就是放弃index和工作区的改动，因为没commit的改动只存在于index和工作区中。
+
+$ git reset --hard HEAD^ 用来撤销已经commit的内容(等价于 git reset --hard HEAD~1) 。原理就是放弃工作区和index的改动，同时HEAD指针指向前一个commit对象。
+
+git revert 也是撤销命令，区别在于reset是指向原地或者向前移动指针，git revert是创建一个commit来覆盖当前的commit,指针向后移动
+
+提交类命令 
+	git add 跟踪新文件或者已有文件的改动，或者用来解决冲突
+
+	git commit 把文件从stage提交到branch
+
+	git commit -a 把修改的文件先提交到stage,然后再从stash提交到branch
+　　$ git commit -m [message] # 提交暂存区所有文件到仓库区,并指定提交说明
+  
+　　$ git commit [file1] [file2] ... -m [message] # 提交暂存区的指定文件到仓库区,并指定提交说明
+  
+　　$ git commit -a # 提交工作区自上次commit之后的变化,直接到仓库区。是git add 和 git commit的组合操作
+  
+　　$ git commit -v # 提交时显示所有diff信息
+  
+　　$ git commit --amend -m [message] # 使用一次新的commit,替代上一次提交
+
+删除类命令 
+git rm --cached readme.txt 只从stage中删除，保留物理文件
+
+git rm readme.txt 不但从stage中删除，同时删除物理文件
+
+git mv a.txt b.txt 把a.txt改名为b.txt
+
+　$ git add [file1] [file2] ... # 添加指定文件到暂存区
+  
+　　$ git add [dir] # 添加指定目录到暂存区,包括子目录
+  
+　　$ git add . # 添加当前目录的所有文件到暂存区
+  
+　　$ git rm [file1] [file2] ... # 删除工作区文件,并且将这次删除放入暂存区
+  
+　　$ git rm --cached [file] # 停止追踪指定文件,但该文件会保留在工作区
+  
+　　$ git mv [file-original] [file-renamed] # 改名文件,并且将这个改名放入暂存区
+  
+Merge类命令
+
+在冲突状态下，需要解决冲突的文件会从index打回到工作区。
+
+1.用工具或者手工解决冲突 
+2.git add 命令来表明冲突已经解决。 
+3.再次commit 已解决冲突的文件。
+
+$ git reset --hard ORIG_HEAD 用来撤销已经commit 的merge. 
+$ git reset --hard HEAD 用来撤销还没commit 的merge,其实原理就是放弃index和工作区的改动。
+
+git reset --merge ORIG_HEAD，注意其中的--hard 换成了 --merge，这样就可以避免在回滚时清除working tree。
+　
+分支
+  
+　　$ git branch # 列出所有本地分支
+  
+　　$ git branch -r # 列出所有远程分支
+  
+　　$ git branch -a # 列出所有本地分支和远程分支
+  
+　　$ git branch [branch-name] # 新建一个分支,但依然停留在当前分支
+  
+　　$ git checkout -b [branch] # 新建一个分支,并切换到该分支
+  
+　　$ git branch [branch] [commit] # 新建一个分支,指向指定commit
+  
+　　$ git checkout [branch-name] # 切换到指定分支
+  
+　　$ git merge [branch] # 合并指定分支到当前分支
+  
+　　$ git branch -d [branch-name] # 删除本地分支
+  
+　　$ git push origin --delete [branch-name] # 方法一:删除远程分支
+  
+　　$ git branch -dr [remote/branch] # 方法二:删除远程分支	
+标签
+  
+　　$ git tag # 列出所有tag
+  
+　　$ git tag [tag] # 在当前commit新建一个tag
+  
+　　$ git tag [tag] [commit] # 在指定commit新建一个tag
+  
+　　$ git tag -d [tag] # 删除本地tag
+  
+　　$ git push origin :refs/tags/[tagName] # 删除远程tag
+  
+　　$ git show [tag] # 查看tag信息
+  
+　　$ git push [remote] [tag] # 提交指定tag
+  
+　　$ git push [remote] --tags # 提交所有tag
+  
+　　$ git checkout -b [branch] [tag] # 新建一个分支,指向某个tag
+  　远程同步
+  
+　　$ git fetch [remote] # 下载远程仓库的所有变动到暂存区
+  
+　　$ git remote -v # 显示所有远程仓库
+  
+　　$ git remote show [remote] # 显示某个远程仓库的信息
+  
+　　$ git remote add [shortname] [url] # 增加一个新的远程仓库,并命名
+  
+　　$ git pull [remote] [branch] # 取回远程仓库的变化,并与本地分支合并
+  
+　　$ git push [remote] [branch] # 上传本地指定分支到远程仓库
+  
+　　$ git push [remote] --force # 即使有冲突,强行推送当前分支到远程仓库
+  
+　　$ git push [remote] --all # 推送所有分支到远程仓库
+  
+　　设置
+  
+　　git的配置文件是.gitconfig,支持全局配置和项目配置,全部配置对所有项目有效,用 --global选择指定。
+  
+　　$ git config --list #显示配置
+  
+　　$ git config -e [--global] #编辑(全局)配置文件
+  
+　　$ git config [--global] user.name "xx" #设置 commit 的用户
+  
+　　$ git config [--global] user.email "xx@xx.com" #设置 commit 的邮箱
